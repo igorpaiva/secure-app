@@ -22,15 +22,19 @@ public class SessionFilter extends OncePerRequestFilter {
     private final CurrentUserService currentUserService;
 
     @Autowired
-    public SessionFilter(InMemorySessionRegistry sessionRegistry, CurrentUserService currentUserService) {
+    public SessionFilter(final InMemorySessionRegistry sessionRegistry,
+                         final CurrentUserService currentUserService) {
         this.sessionRegistry = sessionRegistry;
         this.currentUserService = currentUserService;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
+        final String requestPath = request.getRequestURI();
         final String sessionId = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (sessionId == null || sessionId.length() == 0) {
+        if (!requestPath.equals("/api/login") && (sessionId == null || sessionId.length() == 0)) {
             filterChain.doFilter(request, response);
         }
 

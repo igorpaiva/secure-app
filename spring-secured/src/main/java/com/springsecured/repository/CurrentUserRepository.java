@@ -1,6 +1,7 @@
 package com.springsecured.repository;
 
 import com.springsecured.model.CurrentUser;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -9,10 +10,11 @@ import java.util.HashMap;
 public class CurrentUserRepository {
     private static final HashMap<String, CurrentUser> REGISTERED_USERS = new HashMap<>(2);
 
+    @PostConstruct
     public void setupUsers() {
         REGISTERED_USERS.put("user1", buildCurrentUser(
                 "user1",
-                "$2a$10$4EvCE3wPMBPYEV/FA8B.3e1mrlCGaVuq.cO0x0fmrt198H61q/dFG"
+                "$2a$12$oFZc0/Ax3p42LFtfJeLW7Oib5o5OZAKxh35uX766RsdMXHTOmr3Qq"
         ));
         REGISTERED_USERS.put("user2", buildCurrentUser(
                 "user2",
@@ -29,7 +31,7 @@ public class CurrentUserRepository {
         currentUser.setUsername(username);
         currentUser.setPassword(password);
 
-        return null;
+        return currentUser;
     }
 
 }
