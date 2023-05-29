@@ -18,11 +18,11 @@ import java.io.IOException;
 
 @Component
 public class SessionFilter extends OncePerRequestFilter {
-    private final InMemorySessionRegistry sessionRegistry;
+    private final SessionRegistry sessionRegistry;
     private final CurrentUserService currentUserService;
 
     @Autowired
-    public SessionFilter(final InMemorySessionRegistry sessionRegistry,
+    public SessionFilter(final SessionRegistry sessionRegistry,
                          final CurrentUserService currentUserService) {
         this.sessionRegistry = sessionRegistry;
         this.currentUserService = currentUserService;
