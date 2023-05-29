@@ -1,2 +1,2 @@
 # secured-app
-secured app using Spring and Angular
+secure app using Spring and Angular
